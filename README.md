@@ -115,6 +115,8 @@ The `Article` class itself has functions that you can call.  Note this is not a 
 
 Mongoose's find method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the data comes back.
 
+```query.js```
+
 ```javascript
 Article.find(
 	{ author: 'Matt' },
