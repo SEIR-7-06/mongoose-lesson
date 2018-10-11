@@ -23,6 +23,32 @@ First install the npm package
 npm install mongoose --save
 ```
 
+- Let's set up our database connection in a file called ```db.js```
+```
+const mongoose = require('mongoose');
+
+const connectionString = 'mongodb://localhost/test';
+
+
+mongoose.connect(connectionString);
+
+
+mongoose.connection.on('connected', () => {
+  console.log(`Mongoose connected to ${connectionString}`);
+});
+
+mongoose.connection.on('error', (err) => {
+  console.log(`Mongoose connected error ${err}`);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose disconnected');
+});
+
+```
+
+- test is what the database is called, it will automatically be called whatever you put after ```localhost/```
+
 ```javascript
 const mongoose = require('mongoose'); //require mongoose package
 const Schema = mongoose.Schema; //mongoose has many properties on it.  One is a constructor function for Schemas
@@ -62,34 +88,24 @@ Now that we have an Article class, we should import it in another file and use i
 
 ```javascript
 const mongoose = require('mongoose');
-const db = mongoose.connection;
+require('./db')
 const Article = require('./article.js');
 
-//connect to mongo
-mongoose.connect('mongodb://localhost:27017/example');
 
 
-//if the connection fails
-db.on('error', ()=>{
-	console.log('error');
+//save article to the database
+Article.create({
+	title: 'Awesome Title',
+	author: 'Matt'
+}, (err, article)=>{
+	if(err) { //if there's an error, log it
+		console.log(err);
+	} else { //else log the created article
+		console.log(article);
+	}
+	mongoose.connection.close();//close the connection so that the program will end
 });
 
-
-db.once('open', ()=>{
-	//we're connected!
-	//save article to the database
-	Article.create({
-		title: 'Awesome Title',
-		author: 'Matt'
-	}, (err, article)=>{
-		if(err) { //if there's an error, log it
-  			console.log(err);
-		} else { //else log the created article
-			console.log(article);
-		}
-		mongoose.connection.close();//close the connection so that the program will end
-	});
-});
 
 ```
 
