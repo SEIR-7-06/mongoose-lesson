@@ -103,7 +103,7 @@ Article.create({
 	} else { //else log the created article
 		console.log(article);
 	}
-	mongoose.connection.close();//close the connection so that the program will end
+	
 });
 
 
