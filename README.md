@@ -191,7 +191,7 @@ Article.create({
 			{ author: 'Matt' },
 			(err, response)=>{
 				console.log(response); //just tells you the action was successful
-				mongoose.connection.close();//close the connection so that the program will end
+				
 			}
 		);
 	}
