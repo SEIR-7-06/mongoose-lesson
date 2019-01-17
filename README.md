@@ -15,7 +15,7 @@ ODM stands for Object Document Model. It translates the "documents" being stored
 
 ## Create a Schema for a collection
 
-In mongo, you can put whatever you want into your collections.  This can be a little dangerous because you might make a mistake in your code.  To avoid having the wrong kind of data in your database, Mongoose allows us to create Schemas (or blueprints) for our objects, so that something funny doesn't find its way in.
+In mongo, you can put whatever you want into your collections.  This can be a little dangerous because you might make a mistake in your code.  To avoid having the wrong kind of data in your database, Mongoose allows us to create Schemas (or blueprints) for our objects, so that something funny doesn't find its way in.  Each Schema maps to a Collection and defines the shape of the documents.
 
 First install the npm package
 
