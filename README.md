@@ -24,7 +24,7 @@ npm install mongoose --save
 ```
 
 - Let's set up our database connection in a file called ```db.js```
-```
+```javascript
 const mongoose = require('mongoose');
 
 const connectionString = 'mongodb://localhost/test';
@@ -81,6 +81,15 @@ Here are the most common types of properties you can have
 1. Mixed
 1. ObjectId
 1. Array
+
+### The Big Picture 
+<br>
+
+- Here is the big picture overview of the components we'll be working with:
+
+<img src="https://i.imgur.com/Q6A7KTQ.png" width="900">
+
+---
 
 ## Create a model and save it
 
