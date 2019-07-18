@@ -155,7 +155,7 @@ Article.updateOne(
 Mongoose's remove method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the remove is complete.
 
 ```javascript
-Article.remove(
+Article.deleteOne(
 	{ author: 'Matt' },
 	(err, response)=>{
 		console.log(response); //just tells you the action was successful
