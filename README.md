@@ -140,7 +140,7 @@ Article.find(
 Mongoose's update method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the update is complete.
 
 ```javascript
-Article.update(
+Article.updateOne(
 	{ author: 'Matt' },
 	{ $set : { author: 'Matthew' } },
 	{ multi: true },
