@@ -30,7 +30,10 @@ const mongoose = require('mongoose');
 const connectionString = 'mongodb://localhost/test';
 
 
-mongoose.connect(connectionString, { useNewUrlParser: true});
+mongoose.connect(connectionString, { useNewUrlParser: true,
+                                     useUnifiedTopology: true,
+                                     useCreateIndex: true
+                                     });
 
 
 mongoose.connection.on('connected', () => {
