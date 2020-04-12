@@ -27,7 +27,7 @@ npm install mongoose --save
 ```javascript
 const mongoose = require('mongoose');
 
-const connectionString = 'mongodb://localhost/test';
+const connectionString = 'mongodb://localhost:27017/test';
 
 
 mongoose.connect(connectionString, { useNewUrlParser: true,
@@ -50,7 +50,7 @@ mongoose.connection.on('disconnected', () => {
 
 ```
 
-- test is what the database is called, it will automatically be called whatever you put after ```localhost/```
+- test is what the database is called, it will automatically be called whatever you put after ```localhost:27017/```
 
 ```javascript
 const mongoose = require('mongoose'); //require mongoose package
