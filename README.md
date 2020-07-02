@@ -20,7 +20,7 @@ In mongo, you can put whatever you want into your collections.  This can be a li
 First install the npm package
 
 ```
-npm install mongoose --save
+npm i mongoose
 ```
 
 - Let's set up our database connection in a file called ```db.js```
@@ -30,10 +30,12 @@ const mongoose = require('mongoose');
 const connectionString = 'mongodb://localhost:27017/test';
 
 
-mongoose.connect(connectionString, { useNewUrlParser: true,
-                                     useUnifiedTopology: true,
-                                     useCreateIndex: true
-                                     });
+mongoose.connect(connectionString, { 
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true,
+	useFindAndModify: false,
+});
 
 
 mongoose.connection.on('connected', () => {
