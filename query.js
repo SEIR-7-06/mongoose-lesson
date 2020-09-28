@@ -1,68 +1,66 @@
-const db = require('./db');
+require('./db');
+const Article = require('./Article');
 
-// Article Data
-const articleData = {
-  title: 'Python',
-  author: 'Kevin Smith',
-  body: 'This is an amazing book. I highly recommend it.',
-};
 
-// Create Article Query
-// The create() method will also accept an array of objects
-// db.Article.create(articleData, (err, newArticle) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(newArticle);
-//   }
+// Find Article By Title
+// Article.find({title: 'Article One'}, (err, foundArticle) => {
+//   // Always handle the error first
+//   if (err) console.log(err);
+//   console.log(foundArticle);
+//   process.exit();
 // });
 
 // Find All Articles
-// db.Article.find({}, (err, allArticles) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(allArticles);
-//   }
+Article.find({}, (err, foundArticle) => {
+  // Always handle the error first
+  if (err) console.log(err);
+
+  console.log(foundArticle);
+  process.exit();
+});
+
+
+
+// Creat Article Data
+const articleData = [
+  {
+    title: 'Article Two',
+    author: 'John Doe',
+    body: 'This is the body for Article One'
+  },
+  {
+    title: 'Article Three',
+    author: 'John Doe',
+    body: 'This is the body for Article One'
+  }
+]
+
+// Create Article Query
+// Article.create(articleData, (err, newArticle) => {
+//   if (err) console.log(err);
+
+//   console.log('New Article created successfully');
+//   console.log(newArticle);
+//   process.exit();
 // });
 
-// Find All Articles that Match Property
-// db.Article.find({author: 'John Doe'}, (err, allArticles) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(allArticles);
-//   }
-// });
-
-// Find Article By ID
-// db.Article.findById('5e98df62992102027e084916', (err, foundArticle) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(foundArticle);
-//   }
-// });
-
-// Find Article By ID And Update
-// db.Article.findByIdAndUpdate(
-//   '5e98df62992102027e084916',
-//   {title: 'Java', author: 'Mary Smith', body: 'Eh....'},
-//   {new: true},
+// Update One Article
+// Article.findByIdAndUpdate(
+//   '5efe6607df49cead5b59b634', // Which article by ID to find
+//   {author: 'John Doe', title: 'No title'}, // Object representing the changes to make
+//   {new: true}, // Do you want the origial, unedited doc, or the updated doc back
 //   (err, updatedArticle) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(updatedArticle);
-//     }
+//     if (err) console.log(err);
+
+//     console.log(updatedArticle);
+//     process.exit();
 //   }
 // );
 
-// Find Article By ID and Delete
-// db.Article.findByIdAndDelete('5e98df62992102027e084916', (err, deletedArticle) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(deletedArticle);
-//   }
+// Delete One Article
+// Article.findOneAndDelete({title: 'No title', author: 'John Doe'}, (err, deletedArticle) => {
+//   if (err) console.log(err);
+
+//   console.log(deletedArticle);
+//   process.exit();
 // });
