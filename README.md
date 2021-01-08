@@ -147,8 +147,8 @@ const Article = require('./article.js');
 //save article to the database
 Article.create({
 	title: 'Awesome Title',
-	author: 'Matt'
-}, (err, article)=>{
+	author: 'John Doe'
+}, (err, article) => {
 	if(err) { //if there's an error, log it
 		console.log(err);
 	} else { //else log the created article
@@ -168,13 +168,41 @@ Mongoose's find method is pretty similar Mongo's, except you need to pass it a c
 
 ```query.js```
 
+
 ```javascript
 Article.find(
-	{ author: 'Matt' },
-	(err, articles)=>{
-		console.log(articles); // an array of articles
+	{},
+	(err, allArticles) => {
+		console.log(allArticles); // an array of all articles
 	}
 );
+
+```javascript
+Article.find(
+	{ author: 'John Doe' },
+	(err, articles) => {
+		console.log(articles); // an array of articles where author = John Doe
+	}
+);
+```
+
+## Create
+
+Mongoose's create method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the update is complete.
+
+```query.js```
+
+```javascript
+Article.create({
+	title: 'Awesome Title',
+	author: 'John Doe',
+}, (err, createdArticle) => {
+	if(err) { //if there's an error, log it
+		console.log(err);
+	} else { //else log the created article
+		console.log(createdArticle);
+	}
+});
 ```
 
 ## Update
@@ -182,9 +210,22 @@ Article.find(
 Mongoose's update method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the update is complete.
 
 ```javascript
+Article.findByIdAndUpdate(
+	ENTER ID FROM YOUR DATABASE HERE,
+	{ author: 'Jane Smith' },
+	{ new: true },
+	(err, updatedArticle) => {
+		console.log(updatedArticle);
+	}
+);
+```
+
+alternatively:
+
+```javascript
 Article.updateOne(
-	{ author: 'Matt' },
-	{ $set : { author: 'Matthew' } },
+	{ author: 'John Doe' },
+	{ $set : { author: 'Jane Smith' } },
 	{ multi: true },
 	(err, response)=>{
 		console.log(response); //just tells you the action was successful
@@ -192,13 +233,24 @@ Article.updateOne(
 );
 ```
 
-## Remove
+## Delete
 
-Mongoose's remove method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the remove is complete.
+Mongoose's delete method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the remove is complete.
+
+```javascript
+Article.findByIdAndDelete(
+	ENTER ID FROM YOUR DATABASE HERE,
+	(err, deletedArticle)=>{
+		console.log(deletedArticle);
+	}
+);
+```
+
+alternatively:
 
 ```javascript
 Article.deleteOne(
-	{ author: 'Matt' },
+	{ author: 'John Doe' },
 	(err, response)=>{
 		console.log(response); //just tells you the action was successful
 	}
@@ -212,16 +264,16 @@ The following will not work as expected (create an article and then remove it):
 ```javascript
 Article.create({
 	title: 'Awesome Title',
-	author: 'Matt'
-}, (err, article)=>{
+	author: 'Sara Smith'
+}, (err, createdArticle)=>{
 	if(err) { //if there's an error, log it
 		console.log(err);
 	} else { //else log the created article
-		console.log(article);
+		console.log(createdArticle);
 	}
 });
-Article.remove(
-	{ author: 'Matt' },
+Article.deleteOne(
+	{ author: 'Sara Smith' },
 	(err, response)=>{
 		console.log(response); //just tells you the action was successful
 	}
@@ -233,13 +285,13 @@ Instead, you'll have to execute the second command in the callback of the first
 ```javascript
 Article.create({
 	title: 'Awesome Title',
-	author: 'Matt'
-}, (err, article)=>{
+	author: 'Sara Smith'
+}, (err, createdArticle)=>{
 	if(err) { //if there's an error, log it
 		console.log(err);
-	} else { //else log the created article
-		Article.remove(
-			{ author: 'Matt' },
+	} else { //else delete the created article
+		Article.deleteOne(
+			{ author: 'Sara Smith' },
 			(err, response)=>{
 				console.log(response); //just tells you the action was successful
 				
