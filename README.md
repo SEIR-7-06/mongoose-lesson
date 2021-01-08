@@ -135,27 +135,14 @@ Here are the most common types of properties you can have
 
 ## Query the Databse
 
-Now that we have an Article model, we can import it in another file and use it to create a new Article in our DB.  Remember, all the Article schema does is set up the blueprint that all article objects must follow.  It doesn't create anything in the DB.
+Now that we have an Article model, we can import it in another file, just to keep things clean, and use it to create a new Article in our DB.  Remember, all the Article schema does is set up the blueprint that all article objects must follow.  It doesn't create anything in the DB.
+
+Let's a new file called ```query.js``` and require our database connection and Article model
 
 ```javascript
-const mongoose = require('mongoose');
 require('./db')
 const Article = require('./article.js');
 
-
-
-//save article to the database
-Article.create({
-	title: 'Awesome Title',
-	author: 'John Doe'
-}, (err, article) => {
-	if(err) { //if there's an error, log it
-		console.log(err);
-	} else { //else log the created article
-		console.log(article);
-	}
-	
-});
 
 
 ```
