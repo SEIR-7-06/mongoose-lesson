@@ -54,6 +54,7 @@ mongoose.connection.on('disconnected', () => {
 
 - test is what the database is called, it will automatically be called whatever you put after ```localhost:27017/```
 
+- Let's create a model for our Article resource in a file called ```Article.js```
 ```javascript
 const mongoose = require('mongoose'); //require mongoose package
 const Schema = mongoose.Schema; //mongoose has many properties on it.  One is a constructor function for Schemas
