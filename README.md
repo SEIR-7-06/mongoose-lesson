@@ -86,7 +86,7 @@ mongoose.connection.on('disconnected', () => {
 
 - With the configuration above, we are connecting to a database named "test" running on a local MongoDB service. The databse automatically be called whatever you put after ```localhost:27017/```
 
-## Create a collection Schema and Model
+## Create a Schema and Model for a database resource
 
 In mongo, you can put whatever you want into your collections.  This can be a little dangerous because you might make a mistake in your code.  To avoid having the wrong kind of data in your database, Mongoose allows us to create Schemas (or blueprints) for our objects, so that something funny doesn't find its way in.  Each Schema maps to a Collection and defines the shape of the documents.
 
@@ -133,9 +133,9 @@ Here are the most common types of properties you can have
 
 ---
 
-## Create a model and save it
+## Query the Databse
 
-Now that we have an Article class, we should import it in another file and use it to create a new Article in our DB.  Remember, all the Article class does is set up the blueprint that all article objects must follow.  It doesn't create anything in the DB.
+Now that we have an Article model, we can import it in another file and use it to create a new Article in our DB.  Remember, all the Article schema does is set up the blueprint that all article objects must follow.  It doesn't create anything in the DB.
 
 ```javascript
 const mongoose = require('mongoose');
@@ -160,7 +160,7 @@ Article.create({
 
 ```
 
-## Find a specific model
+## Find
 
 The `Article` class itself has functions that you can call.  Note this is not a specific instance of an article, but rather the class.
 
@@ -177,7 +177,7 @@ Article.find(
 );
 ```
 
-## Update a model already in the database
+## Update
 
 Mongoose's update method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the update is complete.
 
@@ -192,7 +192,7 @@ Article.updateOne(
 );
 ```
 
-## Remove a model already in the database
+## Remove
 
 Mongoose's remove method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the remove is complete.
 
