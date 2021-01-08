@@ -47,7 +47,7 @@ const Contact = mongoose.model('Contact', ContactSchema);
 
 ## Create a connection to MongoDB
 
-We need to install and require Mongoose in our project and connect to the MongoDB service (it could be local or hosted). We can do this in server.js, or separate the code a little more by using a models directory and connecting everything in models/index.js.
+We need to install and require Mongoose, and connect to the MongoDB service (it could be local or hosted).
 
 First install the npm package
 
