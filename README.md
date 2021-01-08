@@ -9,13 +9,43 @@
 1. Remove a model already in the database
 1. Combine Actions
 
-## Explain what an ODM is
+## What is an ODM?
 
-ODM stands for Object Document Model. It translates the "documents" being stored in Mongo into fancier JS objects that have more helpful methods and properties.
+ODM stands for Object Document Model. It translates the "documents" being stored in Mongo into fancier JS objects that have more helpful methods and properties. The ODM that we will use with MongoDB is Mongoose.
 
-## Create a Schema for a collection
+Mongoose presents us with two key concepts for how we create and store data in our MongoDB database, schemas and models.
 
-In mongo, you can put whatever you want into your collections.  This can be a little dangerous because you might make a mistake in your code.  To avoid having the wrong kind of data in your database, Mongoose allows us to create Schemas (or blueprints) for our objects, so that something funny doesn't find its way in.  Each Schema maps to a Collection and defines the shape of the documents.
+
+## What is a Schema?
+
+**[Schema](http://mongoosejs.com/docs/guide.html)**: A Schema is a diagram or blueprint for what every object in the noSQL database will contain. It does not include any methods, just placeholders for what data you will eventually store. Here's an example of a simple Address Book mongoose schema:
+
+```js
+const ContactSchema = new Schema({
+    firstName: String,
+    lastName: String,
+    address: String,
+    phoneNumber: Number,
+    email: String,
+    professionalContact: Boolean
+});
+```
+
+With the above Schema, we can expect that all ojects created from this blueprint would have a first name, last name, address, and email address in the form of Strings. We can count on the phoneNumber to always be accepted, stored, and returned as a number. Lastly, the boolean value of Professional Contact will always be a true or false. A Schema has no functionality. It simply defines the shape of the data that we will expect when we work with contacts.
+
+## What is a Model?
+
+**[Model](http://mongoosejs.com/docs/models.html)**: A mongoose model is compiled from a Schema. It takes in the structure and shape of a Schema and adds the capacity to perform actions such as reading, saving, updating, etc. The Schema is just an inert mould to make sure that the models will hold the data consistently. A model is actually capable of creating new entries in a database and retrieving data from the database. Here's how you'd make a Contact model out of our Contact Schema:
+
+```js
+const Contact = mongoose.model('Contact', ContactSchema);
+```
+
+> In mongoose, a schema represents the structure of a particular document, either completely or just a portion of the document. It's a way to express expected properties and values as well as constraints and indicies. A model defines a programming interface for interacting with the database (read, insert, update, etc). So a schema answers "what will the data in this collection look like?" and a model provides functionality like "Are there any records matching this query?" or "Add a new document to the collection".
+
+## Let's Code! Create a connection to MongoDB
+
+We need to install and require Mongoose in our project and connect to the MongoDB service (it could be local or hosted). We can do this in server.js, or separate the code a little more by using a models directory and connecting everything in models/index.js.
 
 First install the npm package
 
@@ -23,7 +53,7 @@ First install the npm package
 npm i mongoose
 ```
 
-- Let's set up our database connection in a file called ```db.js```
+Let's set up our database connection in a file called ```db.js```
 ```javascript
 const mongoose = require('mongoose');
 
@@ -53,6 +83,10 @@ mongoose.connection.on('disconnected', () => {
 ```
 
 - test is what the database is called, it will automatically be called whatever you put after ```localhost:27017/```
+
+## Create a collection Schema and Model
+
+In mongo, you can put whatever you want into your collections.  This can be a little dangerous because you might make a mistake in your code.  To avoid having the wrong kind of data in your database, Mongoose allows us to create Schemas (or blueprints) for our objects, so that something funny doesn't find its way in.  Each Schema maps to a Collection and defines the shape of the documents.
 
 - Let's create a model for our Article resource in a file called ```Article.js```
 ```javascript
