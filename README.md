@@ -43,7 +43,9 @@ const Contact = mongoose.model('Contact', ContactSchema);
 
 > In mongoose, a schema represents the structure of a particular document, either completely or just a portion of the document. It's a way to express expected properties and values as well as constraints and indicies. A model defines a programming interface for interacting with the database (read, insert, update, etc). So a schema answers "what will the data in this collection look like?" and a model provides functionality like "Are there any records matching this query?" or "Add a new document to the collection".
 
-## Let's Code! Create a connection to MongoDB
+# Let's Code!
+
+## Create a connection to MongoDB
 
 We need to install and require Mongoose in our project and connect to the MongoDB service (it could be local or hosted). We can do this in server.js, or separate the code a little more by using a models directory and connecting everything in models/index.js.
 
