@@ -84,7 +84,7 @@ mongoose.connection.on('disconnected', () => {
 
 ```
 
-- test is what the database is called, it will automatically be called whatever you put after ```localhost:27017/```
+- With the configuration above, we are connecting to a database named "test" running on a local MongoDB service. The databse automatically be called whatever you put after ```localhost:27017/```
 
 ## Create a collection Schema and Model
 
