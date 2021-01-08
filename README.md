@@ -13,7 +13,7 @@
 
 ODM stands for Object Document Model. It translates the "documents" being stored in Mongo into fancier JS objects that have more helpful methods and properties. The ODM that we will use with MongoDB is Mongoose.
 
-Mongoose presents us with two key concepts for how we create and store data in our MongoDB database, schemas and models.
+Mongoose presents us with two key concepts for how we create and store data in our MongoDB database: Schemas and Models.
 
 
 ## What is a Schema?
