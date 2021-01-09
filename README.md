@@ -142,9 +142,6 @@ Let's a new file called ```query.js``` and require our database connection and A
 ```javascript
 require('./db')
 const Article = require('./article.js');
-
-
-
 ```
 
 ## Find
@@ -163,12 +160,15 @@ Article.find(
 		console.log(allArticles); // an array of all articles
 	}
 );
+```
+
+Query with filtering object:
 
 ```javascript
 Article.find(
-	{ author: 'John Doe' },
+	{ author: 'John Doe' }, // only return articles where author = John Doe
 	(err, articles) => {
-		console.log(articles); // an array of articles where author = John Doe
+		console.log(articles);
 	}
 );
 ```
