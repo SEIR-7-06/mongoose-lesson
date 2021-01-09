@@ -155,7 +155,7 @@ Mongoose's find method is pretty similar Mongo's, except you need to pass it a c
 
 ```javascript
 Article.find(
-	{},
+	{}, // do not filter articles
 	(err, allArticles) => {
 		console.log(allArticles); // an array of all articles
 	}
@@ -166,9 +166,9 @@ Query with filtering object:
 
 ```javascript
 Article.find(
-	{ author: 'John Doe' }, // only return articles where author = John Doe
+	{ author: 'John Doe' }, // filter articles by author = John Doe
 	(err, articles) => {
-		console.log(articles);
+		console.log(articles); // an array of all articles by John Doe
 	}
 );
 ```
