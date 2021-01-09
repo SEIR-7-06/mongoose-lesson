@@ -1,13 +1,31 @@
 const mongoose = require('mongoose');
-const connectionString = 'mongodb://localhost:27017/mongoose_intro';
 
-mongoose.connect(connectionString, {
-  useFindAndModify: false,
+const connectionString = 'mongodb://localhost:27017/test';
+
+const configObj = {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useFindAndModify: false,
   useCreateIndex: true,
-})
-  .then(() => {
-    console.log('MongoDB successfully connected...');
-  })
-  .catch(() => console.log('MongoDB connection failed...'));
+  useUnifiedTopology: true,
+};
+
+// If the database does not yet exist, it will not be listed in MongoDB until the firsr insert
+
+// Connect to MongoDB
+// Takes 2 args:
+// - Connection String
+// - Config Object
+
+mongoose.connect(connectionString, configObj);
+
+mongoose.connection.on('connected', () => {
+  console.log('MongoDB connected succesfully');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.log(err);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected...');
+});
