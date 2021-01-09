@@ -43,6 +43,15 @@ const Contact = mongoose.model('Contact', ContactSchema);
 
 > In mongoose, a schema represents the structure of a particular document, either completely or just a portion of the document. It's a way to express expected properties and values as well as constraints and indicies. A model defines a programming interface for interacting with the database (read, insert, update, etc). So a schema answers "what will the data in this collection look like?" and a model provides functionality like "Are there any records matching this query?" or "Add a new document to the collection".
 
+### The Big Picture 
+<br>
+
+- Here is the big picture overview of the components we'll be working with:
+
+<img src="https://i.imgur.com/Q6A7KTQ.png" width="900">
+
+---
+
 # Let's Code!
 
 ## Create a connection to MongoDB
@@ -123,13 +132,6 @@ Here are the most common types of properties you can have
 1. Mixed
 1. ObjectId
 1. Array
-
-### The Big Picture 
-<br>
-
-- Here is the big picture overview of the components we'll be working with:
-
-<img src="https://i.imgur.com/Q6A7KTQ.png" width="900">
 
 ---
 
