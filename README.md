@@ -105,7 +105,7 @@ const mongoose = require('mongoose'); //require mongoose package
 const Schema = mongoose.Schema; //mongoose has many properties on it.  One is a constructor function for Schemas
 
 const articleSchema = new Schema({
-	title:  { type: String, required: true, unique: true }, //can say whether we want properties to be required or unique
+	title:  { type: String, required: true }, //can say whether we want properties to be required or unique
 	author: { type: String, required: true },
 	body:   String,
 	comments: [{ body: String, commentDate: Date }], // can have arrays of objects with specific properties
@@ -156,23 +156,19 @@ Mongoose's find method is pretty similar Mongo's, except you need to pass it a c
 
 
 ```javascript
-Article.find(
-	{}, // do not filter articles
-	(err, allArticles) => {
-		console.log(allArticles); // an array of all articles
-	}
-);
+// find all articles
+Article.find({}, (err, allArticles) => {
+	console.log(allArticles); // an array of all articles
+});
 ```
 
 Query with filtering object:
 
 ```javascript
-Article.find(
-	{ author: 'John Doe' }, // filter articles by author = John Doe
-	(err, articles) => {
-		console.log(articles); // an array of all articles by John Doe
-	}
-);
+// filter articles by author = John Doe
+Article.find({ author: 'John Doe' }, (err, foundArticles) => {
+	console.log(articles); // an array of all articles by John Doe
+});
 ```
 
 ## Create
@@ -182,13 +178,17 @@ Mongoose's create method is pretty similar Mongo's, except you need to pass it a
 ```query.js```
 
 ```javascript
-Article.create({
+const newArticle = {
 	title: 'Awesome Title',
 	author: 'John Doe',
-}, (err, createdArticle) => {
-	if(err) { //if there's an error, log it
+}
+
+Article.create(newArticle, (err, createdArticle) => {
+	if (err) {
+		//if there's an error, log it
 		console.log(err);
-	} else { //else log the created article
+	} else {
+		// otherwise log out the createdArticle
 		console.log(createdArticle);
 	}
 });
@@ -200,7 +200,7 @@ Mongoose's update method is pretty similar Mongo's, except you need to pass it a
 
 ```javascript
 Article.findByIdAndUpdate(
-	ENTER ID FROM YOUR DATABASE HERE,
+	articleId,
 	{ author: 'Jane Smith' },
 	{ new: true },
 	(err, updatedArticle) => {
@@ -227,23 +227,19 @@ Article.updateOne(
 Mongoose's delete method is pretty similar Mongo's, except you need to pass it a callback function to be executed when the remove is complete.
 
 ```javascript
-Article.findByIdAndDelete(
-	ENTER ID FROM YOUR DATABASE HERE,
-	(err, deletedArticle)=>{
-		console.log(deletedArticle);
-	}
-);
+Article.findByIdAndDelete(articleId, (err, deletedArticle) => {
+	console.log(deletedArticle);
+});
 ```
 
 alternatively:
 
 ```javascript
-Article.deleteOne(
-	{ author: 'John Doe' },
-	(err, response)=>{
-		console.log(response); //just tells you the action was successful
-	}
-);
+// Delete the article with the author of 'John Doe'
+
+Article.deleteOne({ author: 'John Doe' }, (err, response) => {
+	console.log(response);
+});
 ```
 
 ## Combine Actions
@@ -251,41 +247,39 @@ Article.deleteOne(
 The following will not work as expected (create an article and then remove it):
 
 ```javascript
-Article.create({
+const newArticle = {
 	title: 'Awesome Title',
 	author: 'Sara Smith'
-}, (err, createdArticle)=>{
-	if(err) { //if there's an error, log it
+};
+
+Article.create(newArticle, (err, createdArticle)=>{
+	if (err) {
 		console.log(err);
-	} else { //else log the created article
+	} else {
 		console.log(createdArticle);
 	}
 });
-Article.deleteOne(
-	{ author: 'Sara Smith' },
-	(err, response)=>{
-		console.log(response); //just tells you the action was successful
-	}
-);
+
+Article.deleteOne({ author: 'Sara Smith' }, (err, response) => {
+	console.log(response);
+});
 ```
 
 Instead, you'll have to execute the second command in the callback of the first
 
 ```javascript
-Article.create({
+const newArticle = {
 	title: 'Awesome Title',
 	author: 'Sara Smith'
-}, (err, createdArticle)=>{
-	if(err) { //if there's an error, log it
+};
+
+Article.create(newArticle, (err, createdArticle) => {
+	if (err) {
 		console.log(err);
-	} else { //else delete the created article
-		Article.deleteOne(
-			{ author: 'Sara Smith' },
-			(err, response)=>{
-				console.log(response); //just tells you the action was successful
-				
-			}
-		);
+	} else {
+		Article.deleteOne({ author: 'Sara Smith' }, (err, response) => {
+			console.log(response);
+		});
 	}
 });
 ```
