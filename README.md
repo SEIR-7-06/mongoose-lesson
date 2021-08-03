@@ -93,16 +93,14 @@ mongoose.connect(connectionString, {
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connected to ${connectionString}`);
 });
-
-mongoose.connection.on('error', (err) => {
+```
+<!-- mongoose.connection.on('error', (err) => {
   console.log(`Mongoose connected error ${err}`);
 });
 
 mongoose.connection.on('disconnected', () => {
   console.log('Mongoose disconnected');
-});
-
-```
+}); -->
 
 - With the configuration above, we are connecting to a database named "test" running on a local MongoDB service. The databse wil automatically be named whatever you put after ```localhost:27017/```
 
