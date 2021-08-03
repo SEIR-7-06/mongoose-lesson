@@ -35,17 +35,14 @@ Mongoose presents us with two key concepts for how we create and store data in o
 **[Schema](http://mongoosejs.com/docs/guide.html)**: A Schema is a diagram or blueprint for what every object in the noSQL database will contain. It does not include any methods, just placeholders for what data you will eventually store. Here's an example of a simple Address Book mongoose schema:
 
 ```js
-const ContactSchema = new Schema({
-    firstName: String,
-    lastName: String,
-    address: String,
-    phoneNumber: Number,
-    email: String,
-    professionalContact: Boolean
+const FruitSchema = new Schema({
+    name: String,
+    color: String,
+    readyToEat: Boolean
 });
 ```
 
-With the above Schema, we can expect that all ojects created from this blueprint would have a first name, last name, address, and email address in the form of Strings. We can count on the phoneNumber to always be accepted, stored, and returned as a number. Lastly, the boolean value of Professional Contact will always be a true or false. A Schema has no functionality. It simply defines the shape of the data that we will expect when we work with contacts.
+With the above Schema, we can expect that all ojects created from this blueprint would have a name, a color, and a readyToEat property. We can expect that the name and color property to always be stored as string values. We can count on the readyToEat property to always be accepted, stored, and returned as a boolean value. A Schema has no functionality. It simply defines the shape of our data.
 
 ## What is a Model?
 
