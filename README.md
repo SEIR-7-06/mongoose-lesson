@@ -35,7 +35,7 @@ Mongoose presents us with two key concepts for how we create and store data in o
 **[Schema](http://mongoosejs.com/docs/guide.html)**: A Schema is a diagram or blueprint for what every object in the noSQL database will contain. It does not include any methods, just placeholders for what data you will eventually store. Here's an example of a simple Address Book mongoose schema:
 
 ```js
-const FruitSchema = new Schema({
+const fruitSchema = new Schema({
     name: String,
     color: String,
     readyToEat: Boolean
